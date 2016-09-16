@@ -1,0 +1,127 @@
+	<div class="container-fluid bg-primary">
+		<h1>teacherzone.co.uk</h1>
+	</div>
+
+	
+	<nav class="navbar navbar-inverse navbar-static-top">
+
+		<div class="container">
+
+			<ul class="nav navbar-nav">
+
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#Primary">Primary
+					<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="#">Art</a></li>
+						<li><a href="../primary/literacy">Literacy</a></li>
+						<li><a href="../primary/numeracy">Numeracy</a></li>
+						<li><a href="#">Science</a></li> 
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#Secondary">Secondary
+					<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="#">Art</a></li>
+						<li><a href="#">Biology</a></li>
+						<li><a href="#">Chemistry</a></li>
+						<li><a href="#">English</a></li>
+						<li><a href="#">Mathematics</a></li>
+						<li><a href="#">Physics</a></li> 
+					</ul>
+				</li>
+
+				<li><a href="#">Worksheet Generator</a></li> 
+				<li><a href="#">Contact</a></li>
+				<li><a href="#">About</a></li>
+			</ul>
+		
+		</div>
+	</nav>
+
+	
+	<nav class="breadcrumb">
+	<li class="breadcrumb-item"><a href="../">Home</a></li>
+	
+
+		<% if ("firstlevel" in page_info.breadcrumblist){ %>
+			
+			<% if (page_info.breadcrumblist["firstlevel"] == page_info.title){ %>
+			
+				<li class="breadcrumb-item"><%= page_info.breadcrumblist["firstlevel"] %></li>
+
+			<% } else{ %>	
+				
+				<li class="breadcrumb-item"><a href="#"><%= page_info.breadcrumblist["firstlevel"] %></a></li>
+			
+			<% } %>	
+				
+				
+		<% } else{ %>  
+
+		<% } %>
+
+
+
+		<% if ("secondlevel" in page_info.breadcrumblist){ %>
+			
+			<% if (page_info.breadcrumblist["secondlevel"] == page_info.title){ %>
+				
+				<li class="breadcrumb-item"><%= page_info.breadcrumblist["secondlevel"] %></li>
+
+			<% } else{ %>	
+				
+				<li class="breadcrumb-item"><a href="#"><%= page_info.breadcrumblist["secondlevel"] %></a></li>
+			
+			<% } %>	
+				
+				
+		<% } else{ %>  
+
+		<% } %>
+
+</nav>		
+
+	<nav class="breadcrumb">
+	<li class="breadcrumb-item"><a href="../">Home</a></li>
+	
+
+		<% if ("firstlevel" in page_info.breadcrumblist){ %>
+			
+			<% if (page_info.breadcrumblist["firstlevel"] == page_info.title){ %>
+			
+				<li class="breadcrumb-item"><%= page_info.breadcrumblist["firstlevel"] %></li>
+
+			<% } else{ %>	
+				
+				<li class="breadcrumb-item"><a href="#"><%= page_info.breadcrumblist["firstlevel"] %></a></li>
+			
+			<% } %>	
+				
+				
+		<% } else{ %>  
+
+		<% } %>
+
+
+
+		<% if ("secondlevel" in page_info.breadcrumblist){ %>
+			
+			<% if (page_info.breadcrumblist["secondlevel"] == page_info.title){ %>
+				
+				<li class="breadcrumb-item"><%= page_info.breadcrumblist["secondlevel"] %></li>
+
+			<% } else{ %>	
+				
+				<li class="breadcrumb-item"><a href="#"><%= page_info.breadcrumblist["secondlevel"] %></a></li>
+			
+			<% } %>	
+				
+				
+		<% } else{ %>  
+
+		<% } %>
+
+</nav>		
+	
