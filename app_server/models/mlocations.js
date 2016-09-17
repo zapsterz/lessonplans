@@ -13,6 +13,7 @@ var lessonSchema = new mongoose.Schema({
 	link_doc: String,
 	link_plan: String,
 	description: String,
+	tags: String,
 	reviews: [lessonReviewSchema]
 	});
 	
