@@ -3,7 +3,7 @@ var mongoose = require( 'mongoose' );
 var dbURI = 'mongodb://localhost/lessonsdb';
 
 if (process.env.NODE_ENV === 'production'){
-	dbURI = process.env.MONGOLAB_URI;
+	dbURI = 'mongodb://mongodb://cp:app20110907@ds033066.mlab.com:33066/heroku_25fs668v';
 }
 mongoose.connect(dbURI);
 
