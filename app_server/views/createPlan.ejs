@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <!--<link rel='stylesheet' href='/stylesheets/style.css' />-->
+	<link rel='stylesheet' href='/stylesheets/lessonplanscss.css' />
+	<link rel='stylesheet' href='/stylesheets/bootstrap/css/bootstrap.css' />
+	<link rel='stylesheet' href='/stylesheets/lessonplanscss.css' />
+	<script src='/javascripts/jquery-3.1.0.min.js' ></script>
+	<script src='/stylesheets/bootstrap/js/bootstrap.js' ></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+
+function changeoptions(id) {
+
+	var selectBox = document.getElementById("selLevel");
+    var selectedValue = selectBox.options[selectBox.selectedIndex].value + "-options";
+    alert(selectedValue);
+    if (selectedValue === 'primary-options'){
+    	var y = document.getElementsByClassName("secondary-options");
+    
+    	for (i = 0; i < y.length; i++) { 
+    		y[i].style.display = "none";
+		}
+		//alert("all secondary hidden");
+    } else if (selectedValue === 'secondary-options') {
+    	var z = document.getElementsByClassName('primary-options');
+    	for (i = 0; i < z.length; i++) { 
+    		z[i].style.display = "none";
+		}
+		//alert("all primary hidden");
+    }
+    
+    var x = document.getElementsByClassName(selectedValue);
+    for (i = 0; i < x.length; i++) {
+    	
+    	x[i].style.display = "block";
+	}
+
+
+}
+
+</script>
+
+  </head>
+  <body>
+
+	<div class="container-fluid dotsbg">
+		<img src="/images/logo-white.png" style="padding:6px 5px 0px 5px;">
+	</div>
+
+
+	<nav class="navbar navbar-inverse navbar-static-top">
+
+		<div class="container">
+
+			<ul class="nav navbar-nav">
+
+
+				<% for (var key in menuoptions) {%>
+		
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#<%= menuoptions[i] %>"><%= menuoptions[key].title %>
+					<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						
+					<% for (var i=0; i<menuoptions[key].options.length; i++) {%>
+						<li><a href="/<%= key %>/<%= menuoptions[key].links[i] %>"><%= menuoptions[key].options[i] %></a></li>
+
+					<% } %> 
+
+
+					</ul>
+				</li>
+
+				<% } %>
+
+
+
+				<li><a href="#">Worksheet Generator</a></li> 
+				<li><a href="#">Contact</a></li>
+				<li><a href="#">About</a></li>
+			</ul>
+		
+		</div>
+	</nav>
+
+	
+
+<form action="/submit/now" method="post" role="form" enctype="multipart/form-data">
+
+
+
+	<label for="level" class="col-md-1 col-md-offset-4">Select Level</label>
+	<div class="form-group col-md-3">
+		
+		<select name="level" class="form-control " onchange="changeoptions(id);" id="selLevel">Level
+			<% for (var key in menuoptions) {%>
+				<!--<option id="<%= key %>-options" value="<%= menuoptions[key].title %>" ><%= menuoptions[key].title %></option>-->
+				<option id="<%= key %>-options" value="<%= key %>" ><%= menuoptions[key].title %></option>
+			<% } %>
+		</select>
+	</div>
+
+	<br>
+
+	
+	<label for="topic" class="col-md-1 col-md-offset-4">Select Topic</label>
+	<div class="form-group col-md-3">	
+		<select name="topic" class="form-control" id="selTopic">Level
+			<% var j = 0 %>
+			<%= j %>
+			<% for (var key in menuoptions) {%>
+				<% j = j + 1%>
+			
+				<% if(j==1) {%>
+
+					<% for (var i=0; i<menuoptions[key].options.length; i++) {%>
+						<option class="primary-options" value="<%= menuoptions[key].links[i] %>" style="display:block"><%= menuoptions[key].options[i] %></option>
+					<% } %>
+
+				<% } %>
+
+				<% if(j==2) {%>
+
+					<% for (var i=0; i<menuoptions[key].options.length; i++) {%>
+						<option class="secondary-options" value="<%= menuoptions[key].links[i] %>" style="display:none"><%= menuoptions[key].options[i] %></option>
+					<% } %>
+
+				<% } %>
+
+			<% } %>
+		</select>
+	</div>
+
+	<label class="col-md-1 col-md-offset-4 text-right">Name</label>
+	<div class="form-group col-md-3">
+		<input name="name" type="text" class="form-control">
+	</div>
+	
+
+
+	<label class="col-md-1 col-md-offset-4 text-right">Tags</label>
+	<div class="form-group col-md-3">
+		<input name="tags" type="text" class="form-control">
+	</div>
+
+	<label class="col-md-1 col-md-offset-4 text-right">Description</label>
+	<div class="form-group col-md-3">
+		<textarea name="description" rows="5" cols="30" class="form-control"></textarea>
+	</div>
+	<br>
+
+	<label class="col-md-1 col-md-offset-4 text-right">Upload the file</label>
+	<div class="form-group col-md-3">
+		<input name="doc" class="form-control" type="file">
+
+	</div>
+	<br>
+
+
+	<label class="col-md-1 col-md-offset-4 text-right">Upload the pdf</label>
+	<div class="form-group col-md-3">
+		<input name="pdf" class="form-control" type="file">
+
+	</div>
+	<br>
+
+
+	<button type="submit" class="col-md-3 col-md-offset-5">Submit</button>
+
+</form>
+
+
+
+
+
+
+
+  
+  </body>
+</html>

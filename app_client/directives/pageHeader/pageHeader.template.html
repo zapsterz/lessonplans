@@ -1,0 +1,75 @@
+
+
+<div ng-if="phvm.vb !=='yes'" id="ckwarning" class="container-fluid text-center" style="padding:20px 0px 20px 0px">
+This site uses cookies. By continuing to use it you agree to our use of cookies. 
+</div>
+
+<div class="container-fluid bg-primary header" style="border-bottom:2px solid white;">
+
+	<div class="row" style="margin:0px; padding:0px;">
+		<div class="col-md-6"><img src="/images/logo-white.png" style="padding:6px 5px 0px 5px;"></div>
+
+		<div class="col-md-2 col-md-offset-4 loginbtn btn" ng-if="phvm.isLoggedIn==false"><a href="/#/login">Click here to log in</a></div>
+
+		<div class="col-md-3 col-md-offset-3 text-right" ng-if="phvm.isLoggedIn==true">Logged in as {{phvm.currentUser.name}}</div>
+
+
+		<button class="col-md-1 col-md-offset-5 bbkrd btn btn-primary" ng-if="phvm.isLoggedIn==true" ng-click="phvm.logout()">Log Out</button>
+		
+	</div>
+
+
+	<div class="row">
+		<nav class="navbar navbar-inverse navbar-static-top" style="background: none; border:none">
+
+			<div class="container">
+
+				<ul class="nav navbar-nav">
+
+
+					<li><a href="/" ng-class="{ myactive: phvm.isActive('/')}">Home</a></li>
+				
+					<li class="dropdown" ng-class="{ myactive: phvm.isActive('/showplans/primary')}">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="/#/showplans/primary">Primary
+						<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="/#/showplans/primary/art">Art</a></li>
+							<li><a href="/#/showplans/primary/literacy">Literacy</a></li>
+							<li><a href="/#/showplans/primary/music">Music</a></li>
+							<li><a href="/#/showplans/primary/numeracy">Numeracy</a></li>
+							<li><a href="/#/showplans/primary/science">Science</a></li>
+						</ul>
+					</li>
+					
+					<li class="dropdown" ng-class="{ myactive: phvm.isActive('/showplans/secondary')}">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="/#/showplans/secondary">Secondary
+						<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="/#/showplans/secondary/art">Art</a></li>
+							<li><a href="/#/showplans/secondary/biology">Biology</a></li>
+							<li><a href="/#/showplans/secondary/chemistry">Chemistry</a></li>
+							<li><a href="/#/showplans/secondary/english">English</a></li>
+							<li><a href="/#/showplans/secondary/french">French</a></li>
+							<li><a href="/#/showplans/secondary/mathematics">Maths</a></li>
+							<li><a href="/#/showplans/secondary/physics">Physics</a></li>
+						</ul>
+					</li>
+
+<!--
+					<li><a href="/#/worksheetgenerator">Worksheet Generator</a></li> 
+-->
+
+					<li ng-class="{ myactive: phvm.isActive('/contact')}"><a href="/#/contact">Contact</a></li>
+					<li ng-class="{ myactive: phvm.isActive('/about')}"><a href="/#/about" >About</a></li>
+					<li><a href="/#/submitter" ng-class="{ myactive: phvm.isActive('/submit')}">Submit</a></li>
+
+				</ul>
+		
+			</div>
+		</nav>
+
+	</div>
+
+</div>
+
+	

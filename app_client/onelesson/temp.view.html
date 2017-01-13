@@ -1,0 +1,203 @@
+<div ng-controller="onelessonCtrl">
+
+
+
+	<div class="container-fluid">
+	
+		<div class="col-md-4">
+			<h3>Plan name: {{vm.lesson.name }}</h3>
+			
+			<p>{{vm.lesson.description}}</p>
+			<p>Average Review: {{vm.avround}}</p>
+		
+		
+			<hr style="margin:25px 0px 25px 0px">
+				<a class="btn-primary download_button" href="/datastore/{{vm.lesson.level}}/{{vm.lesson.topic}}/{{vm.lesson._id}}.{{vm.lesson.ext}}" download="lessonplan">Get the word document</a>
+				<a class="btn-success download_button" ng-click="isReplyFormOpen = !isReplyFormOpen">Leave a review</a>
+			<hr style="margin:25px 0px 25px 0px">
+
+			<form action="{{vm.actionurl}}" method="post" role="form" class="container-fluid form-horizontal" ng-show="isReplyFormOpen" id="replyForm">
+			
+				<div class="form-group">
+				
+					<label class="col-md-4">Name</label>
+					<div class="col-md-8">
+						<input id="authorname" class="form-control" type="text" name="author">
+					</div>
+				</div>
+				<br>
+			
+				<div class="form-group">
+
+					
+					<label class="col-md-4">Review rating</label>
+					<div class="col-md-8 text-center">
+						<img class="myimg" src="/images/0stars.png"/>
+					</div>
+					<input style="display:none" id="revrating" class="col-md-8 text-center" type="text" name="rating">
+			
+			
+			<script>
+var whatim = {"0": "/images/0stars.png", "1":"/images/halfstars.png", "2":"/images/1stars.png", "3":"/images/1halfstars.png", "4":"/images/2stars.png", "5":"/images/2halfstars.png", "6":"/images/3stars.png", "7":"/images/3halfstars.png", "8":"/images/4stars.png", "9":"/images/4halfstars.png", "10":"/images/5stars.png"};
+var parcen, temppercen, clicktemppercen;
+var clicktemppercen = 0;
+
+$(document).ready(function() {
+  $('.myimg').mousemove(function(e) {
+    var width = $('.myimg').get(0).naturalWidth;
+
+    $("#widthimg").html(width);
+    var parentoffset = $('.myimg').parent().offset();
+    var imoff =$('.myimg').offset();
+    $("#parento").html(imoff.left);
+    $("#parento2").html(e.pageX);
+    var relX = (e.pageX - imoff.left);
+    percen = ((relX / width) * 100)-5;
+
+    if (percen < 10){
+    	var newcursrc = "/images/halfstars.png";
+    	$('.myimg').attr('src', newcursrc);
+    	temppercen = 1;
+    } else if (percen > 10 && percen < 20){
+    	$('.myimg').attr('src', "/images/1stars.png");
+    	temppercen = 2;
+    } else if (percen > 20 && percen < 30){
+    	$('.myimg').attr('src', "/images/1halfstars.png");
+    	temppercen = 3;
+    } else if (percen > 30 && percen < 40){
+    	$('.myimg').attr('src', "/images/2stars.png");
+    	temppercen = 4;
+    } else if (percen > 40 && percen < 50){
+    	$('.myimg').attr('src', "/images/2halfstars.png");
+    	temppercen = 5;
+    } else if (percen > 50 && percen < 60){
+    	$('.myimg').attr('src', "/images/3stars.png");
+    	temppercen = 6;
+    } else if (percen > 60 && percen < 70){
+    	$('.myimg').attr('src', "/images/3halfstars.png");
+    	temppercen = 7;
+    } else if (percen > 70 && percen < 80){
+    	$('.myimg').attr('src', "/images/4stars.png");
+    	temppercen = 8;
+    } else if (percen > 80 && percen < 90){
+    	$('.myimg').attr('src', "/images/4halfstars.png");
+    	temppercen = 9;
+    } else if (percen > 90 && percen < 100){
+    	$('.myimg').attr('src', "/images/5stars.png");
+    	temppercen = "10";
+    }
+
+    $("#revrating").val(temppercen);
+    $("#percentage").html(percen);
+
+	});
+});
+$(document).ready(function() {
+ 	$('.myimg').mouseleave(function(){
+    		var find = clicktemppercen.toString();
+    		//alert(find);
+    		var im = whatim[find];
+    		$('.myimg').attr('src', im);
+    		$("#revrating").val(clicktemppercen);
+    	
+    });
+});
+
+$(document).ready(function() {
+    $('.myimg').click(function(){
+    	clicktemppercen = temppercen
+    	//alert(clicktemppercen);
+    	$("#revrating").val(clicktemppercen);
+    	
+    });
+});
+</script>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+				</div>
+				
+	
+				<br>
+			
+				<div class="form-group">
+					<label class="col-md-4">Review</label>
+					<div class="col-md-8">
+						<textarea name="review" rows="4" cols="30" class="form-control col-md-8"></textarea>
+					</div>
+				</div>
+			
+				<br>
+			
+			
+				<div class="col-md-8 col-md-offset-4">
+			
+					<button type="submit">Submit</button>
+		
+				</div>
+
+			</form>
+
+			<h3>Reviews:</h3>
+		
+	
+			<div ng-repeat="i in vm.lesson.reviews | orderBy : 'createdon':true">
+		
+		
+				<div>
+					<h5>Author: {{i.author}}</h3>
+					<p>{{i.rating}}</p>
+					<div><img ng-src="/images/{{i.rating}}stars.png"/></div>
+					<p>{{i.reviewText}}</p>
+				<!--<p>Review Id: {{i._id}}</p>
+				<p>Delete url: {{vm.deletereviewurl}}</p>-->
+					<p>Date: {{i.createdOn | date: yyyy/MM/dd}}</p>
+					<div>
+						<form action="{{vm.deletereviewurl}}" method="post" role="form" class="container-fluid form-horizontal">
+							<div>
+								<input value = {{i._id}} type="text" name="review_id">
+								<button type="submit">Delete</button>
+		
+							</div>
+						</form>
+					</div>
+				</div>
+				<br>
+				<hr>
+
+
+			</div>
+		</div>
+
+
+		<div class="col-md-8">
+
+			<iframe style="width:100%; min-height:400px;" ng-src="{{vm.planurl}}" name="internal" target="internal"></iframe>
+
+		</div>
+
+
+
+
+
+<pageFooter></pageFooter>
+	<div>
+
+<pageFooter></pageFooter>
+</div>
+<pageFooter></pageFooter>
+
+
+
+
+
+		

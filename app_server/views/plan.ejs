@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+
+	<link rel='stylesheet' href='/stylesheets/bootstrap/css/bootstrap.css' />
+	<link rel='stylesheet' href='/stylesheets/lessonplanscss.css' />
+	<script src='/javascripts/jquery-3.1.0.min.js' ></script>
+	<script src='/stylesheets/bootstrap/js/bootstrap.js' ></script>
+	<script src="/angular/angular.min.js"></script>
+	<script src="/angular/myangular.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script>
+var whatim = {"0": "/images/0stars.png", "1":"/images/halfstars.png", "2":"/images/1stars.png", "3":"/images/1halfstars.png", "4":"/images/2stars.png", "5":"/images/2halfstars.png", "6":"/images/3stars.png", "7":"/images/3halfstars.png", "8":"/images/4stars.png", "9":"/images/4halfstars.png", "10":"/images/5stars.png"};
+var parcen, temppercen, clicktemppercen;
+var clicktemppercen = 0;
+
+$(document).ready(function() {
+  $('.myimg').mousemove(function(e) {
+    var width = $('.myimg').get(0).naturalWidth;
+
+    $("#widthimg").html(width);
+    var parentoffset = $('.myimg').parent().offset();
+    var imoff =$('.myimg').offset();
+    $("#parento").html(imoff.left);
+    $("#parento2").html(e.pageX);
+    var relX = (e.pageX - imoff.left);
+    percen = ((relX / width) * 100)-5;
+
+    if (percen < 10){
+    	var newcursrc = "/images/halfstars.png";
+    	$('.myimg').attr('src', newcursrc);
+    	temppercen = 1;
+    } else if (percen > 10 && percen < 20){
+    	$('.myimg').attr('src', "/images/1stars.png");
+    	temppercen = 2;
+    } else if (percen > 20 && percen < 30){
+    	$('.myimg').attr('src', "/images/1halfstars.png");
+    	temppercen = 3;
+    } else if (percen > 30 && percen < 40){
+    	$('.myimg').attr('src', "/images/2stars.png");
+    	temppercen = 4;
+    } else if (percen > 40 && percen < 50){
+    	$('.myimg').attr('src', "/images/2halfstars.png");
+    	temppercen = 5;
+    } else if (percen > 50 && percen < 60){
+    	$('.myimg').attr('src', "/images/3stars.png");
+    	temppercen = 6;
+    } else if (percen > 60 && percen < 70){
+    	$('.myimg').attr('src', "/images/3halfstars.png");
+    	temppercen = 7;
+    } else if (percen > 70 && percen < 80){
+    	$('.myimg').attr('src', "/images/4stars.png");
+    	temppercen = 8;
+    } else if (percen > 80 && percen < 90){
+    	$('.myimg').attr('src', "/images/4halfstars.png");
+    	temppercen = 9;
+    } else if (percen > 90 && percen < 100){
+    	$('.myimg').attr('src', "/images/5stars.png");
+    	temppercen = "10";
+    }
+
+    $("#revrating").val(temppercen);
+    $("#percentage").html(percen);
+
+	});
+});
+$(document).ready(function() {
+ 	$('.myimg').mouseleave(function(){
+    		var find = clicktemppercen.toString();
+    		//alert(find);
+    		var im = whatim[find];
+    		$('.myimg').attr('src', im);
+    		$("#revrating").val(clicktemppercen);
+    	
+    });
+});
+
+$(document).ready(function() {
+    $('.myimg').click(function(){
+    	clicktemppercen = temppercen
+    	//alert(clicktemppercen);
+    	$("#revrating").val(clicktemppercen);
+    	
+    });
+});
+
+$(document).ready(function(){
+	$('.ratingimage').each(function(){
+		var getid = this.id;
+		//alert(getid);
+		var splitid = getid.split("_");
+		var rating = splitid[splitid.length - 1];
+		var ratstring = rating.toString();
+
+		var img = whatim[ratstring];
+		//alert(img);
+		$('#'+getid).attr('src', img);
+	});
+});
+
+</script>
+
+  </head>
+  <body>
+
+	<div class="container-fluid bg-primary">
+		<img src="/images/logo-white.png" style="padding:6px 5px 0px 5px;">
+		<!--<h1>freelessonplans</h1>-->
+	</div>
+
+
+	<nav class="navbar navbar-inverse navbar-static-top">
+
+		<div class="container">
+
+			<ul class="nav navbar-nav">
+
+				<% for (var key in menuoptions) {%>
+		
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="/showplans/<%= menuoptions[i] %>"><%= menuoptions[key].title %>
+					<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						
+					<% for (var i=0; i<menuoptions[key].options.length; i++) {%>
+						<li><a href="/showplans/<%= key %>/<%= menuoptions[key].links[i] %>"><%= menuoptions[key].options[i] %></a></li>
+
+					<% } %> 
+
+
+					</ul>
+				</li>
+
+				<% } %>
+
+				<li><a href="#">Worksheet Generator</a></li> 
+				<li><a href="#">Contact</a></li>
+				<li><a href="#">About</a></li>
+			</ul>
+		
+		</div>
+	</nav>
+
+<% if (level && topic && id) { %>
+<nav class="breadcrumb">
+  <li class="breadcrumb-item"><a href="/">Home</a></li>
+  <li class="breadcrumb-item"><a href="/showplans/<%= level %>"><%= levelu %></a></li>
+  <li class="breadcrumb-item"><a href="/showplans/<%= level %>/<%= topic %>"><%= topicu %></a></li>
+  <li class="breadcrumb-item active"><%= plan.name %></li>
+</nav>	
+<% } else if (level && topic) { %>
+<nav class="breadcrumb">
+  <li class="breadcrumb-item"><a href="/">Home</a></li>
+  <li class="breadcrumb-item"><a href="/showplans/<%= level %>"><%= levelu %></a></li>
+  <li class="breadcrumb-item active"><%= topic %></li>
+</nav>	
+
+<% } else { %>
+<nav class="breadcrumb">
+  <li class="breadcrumb-item"><a href="/">Home</a></li>
+  <li class="breadcrumb-item active"><%= level %></li>
+</nav>
+
+<% } %>
+
+
+
+
+
+
+<div class="container-fluid">
+	
+	<div class="col-md-4">
+		<h3>Plan name: <%= plan.name %></h3>
+		<p><%= plan._id%> - <%= plan.ext %></p>
+		<p><%= plan.description %></p>
+	
+		<hr style="margin:25px 0px 25px 0px">
+		<a class="btn-primary download_button" href="/datastore/<%= plan.level %>/<%= plan.topic %>/<%= plan._id %>.<%=plan.ext%>" download="lessonplan">Get the word document</a>
+		<hr style="margin:25px 0px 25px 0px">
+
+
+		<form action="/showplans/<%= plan.level %>/<%= plan.topic %>/<%= plan._id %>" method="post" role="form" class="container-fluid form-horizontal">
+			
+			<div class="form-group">
+				
+					<label class="col-md-4">Name</label>
+					<div class="col-md-8">
+						<input id="authorname" class="form-control" type="text" name="author">
+					</div>
+			</div>
+			<br>
+			
+			<div class="form-group">
+
+					
+				<label class="col-md-4">Review rating</label>
+				<div class="col-md-8 text-center">
+					<img class="myimg" src="/images/0stars.png"/>
+				</div>
+				<input style="display:none" id="revrating" class="col-md-8 text-center" type="text" name="rating">
+			
+			</div>
+				
+	
+			<br>
+			
+			<div class="form-group">
+				<label class="col-md-4">Review</label>
+				<div class="col-md-8">
+					<textarea name="review" rows="4" cols="30" class="form-control col-md-8"></textarea>
+				</div>
+			</div>
+			
+			<br>
+			
+			
+			<div class="col-md-8 col-md-offset-4">
+			
+				<button type="submit">Submit</button>
+		
+			</div>
+			
+			
+
+		</form>
+
+
+<!--<h3 class="container-fluid">Review list</h3>-->
+<div ng-app="reviewlist"></div>
+
+<div id="avreviewstars">Average review: <%= plan.averagereview %></div>
+
+
+<% if (plan.reviews.length > 0) { %>
+
+		<h3>Reviews:</h3>
+
+		<% for(var i=0; i<plan.reviews.length; i++) {%>
+		<div class='row'>
+	
+		
+			<div>
+				<h5><%= plan.reviews[i].author %></h3>
+				<!--<p><%= plan.reviews[i].rating %></p>-->
+				<div><img id="rating<%=i%>_<%=plan.reviews[i].rating%>" class="ratingimage" src=""/></div>
+				<p><%= plan.reviews[i].reviewText %></p>
+				<p>Review Id: <%= plan.reviews[i]._id %></p>
+				
+				<!--<p><%= plan.reviews[i].createdOn %></p>-->
+				<div>
+					<form action="/delete/<%= plan.level %>/<%= plan.topic %>/<%= plan._id %>/reviews" method="post" role="form" class="container-fluid form-horizontal">
+						<div>
+							<input style="display:none" value = <%= plan.reviews[i]._id %> type="text" name="review_id">
+							<button type="submit">Delete</button>
+		
+						</div>
+					</form>
+
+				</div>
+			</div>				
+				
+		</div>			
+		<div class="clearfix"></div>
+		<hr />	
+
+	<% } %>
+
+<% } %>
+
+	</div>
+	
+	<div class="col-md-8">
+
+		<iframe style="width:100%; min-height:400px;" src="/datastore/<%= plan.level %>/<%= plan.topic %>/<%= plan._id %>.pdf" name="internal" target="internal"></iframe>
+
+	</div>
+</div>
+
+
+  </body>
+</html>

@@ -1,0 +1,73 @@
+<page-header></page-header>
+
+<div id="submit" class="row">
+
+	<div class="col-md-12 submit" style="color:white; padding:0px 0px 30px 0px;">
+
+		<div ng-controller="submitCtrl">
+
+			<h3 class="col-md-offset-1">{{vm.pageHeader.title}}</h3>
+			<br>	
+			<form action="/submit/now" method="post" role="form" enctype="multipart/form-data">
+
+				<label for="level" class="col-md-2 col-md-offset-3 text-right">Select Level</label>
+				<div class="form-group col-md-3">
+		
+					<select name="level" class="form-control" ng-init="Primary" ng-model="level" id="selLevel">Level
+						<option ng-selected="false" ng-repeat="m in vm.titles" value="{{m.titlel}}">{{m.titleU}}</option>
+					</select>
+				</div>
+
+				<label for="topic" class="col-md-2 col-md-offset-3 text-right">Select Topic</label>
+				<div class="form-group col-md-3">
+		
+					<select name="topic" class="form-control" id="selLevel">Topic
+						<option ng-if="level === 'primary'" ng-repeat="m in vm.primarytopics" value="{{m.titlel}}">{{m.titleU}}</option>
+						<option ng-if="level === 'secondary'" ng-repeat="m in vm.secondarytopics" value="{{m.titlel}}">{{m.titleU}}</option>		
+					</select>
+				</div>
+		
+				<label class="col-md-2 col-md-offset-3 text-right">Name</label>
+				<div class="form-group col-md-3">
+					<input name="name" type="text" class="form-control">
+				</div>
+		
+				<label class="col-md-2 col-md-offset-3 text-right">Tags</label>
+				<div class="form-group col-md-3">
+					<input name="tags" type="text" class="form-control">
+				</div>
+
+				<label class="col-md-2 col-md-offset-3 text-right">Description</label>
+				<div class="form-group col-md-3">
+					<textarea name="description" rows="5" cols="30" class="form-control"></textarea>
+				</div>
+				<br>
+
+				<label class="col-md-2 col-md-offset-3 text-right">Upload the editable file</label>
+				<div class="form-group col-md-3">
+					<input name="doc" class="form-control" type="file">
+				</div>
+				<br>
+				
+
+				<label class="col-md-2 col-md-offset-3 text-right">Upload the pdf</label>
+				<div class="form-group col-md-3">
+					<input name="pdf" class="form-control" type="file">
+				</div>
+
+				<br>
+
+				<div class="col-md-3 col-md-offset-5">
+				<button type="submit" class="btn btn-primary btn-block" style="color:black">Submit</button>
+				</div>
+			</form>
+
+		</div>
+	
+	</div>
+
+</div>
+
+
+
+<page-footer></page-footer>

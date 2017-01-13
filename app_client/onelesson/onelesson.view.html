@@ -1,0 +1,227 @@
+
+<page-header></page-header>
+
+<div ng-controller="onelessonCtrl" style="padding:0px 0px 30px 0px">
+
+	<div class="container-fluid" style="padding:0px 0px 30px 0px">
+	
+		<div class="col-md-4">
+			<h3>Plan name: {{vm.lesson.name }}</h3>
+			
+			<p>{{vm.lesson.description}}</p>
+			<p>Average Review: {{vm.lesson.averagereview | formatavereview}}</p>
+		
+			<hr style="margin:25px 0px 25px 0px">
+			<div class="clearfix"></div>
+
+
+
+			<div class="row">
+				<div class="col-xs-12">
+				
+					<div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-0 ">
+						<a class="btn-primary btn-block download_button text-center" href="/datastore/{{vm.lesson.level}}/{{vm.lesson.topic}}/{{vm.lesson._id}}.{{vm.lesson.ext}}" download="lessonplan" target="_self" style="white-space: normal;">Get the word document</a>
+					</div>
+					<div class="col-xs-10 col-xs-offset-1 col-md-offset-0 col-md-6" ng-show="phvm.isLoggedIn">
+						<a class="btn-success btn-block download_button  text-center"  ng-click="isReplyFormOpen = !isReplyFormOpen" style="white-space: normal">Leave a review</a>
+					</div>
+					<div class="col-xs-10 col-xs-offset-1 col-md-offset-0 col-md-6" ng-if="phvm.isLoggedIn==false">
+						<a class="btn-info btn-block download_button text-center"  href="/login" style="white-space: normal">Log in to leave a review</a>
+
+					</div>
+
+				</div>
+			</div>
+
+			<div class="clearfix"></div>
+			
+			<form ng-submit="vm.onSubmit()" role="form" class="container-fluid form-horizontal" ng-show="isReplyFormOpen" id="replyForm" name="addreview">
+			
+			<!--
+				<div class="form-group">
+				
+					<label class="col-md-4">Name</label>
+					<div class="col-md-8">
+						<input id="authorname" ng-model="vm.formData.authorname" class="form-control" type="text" name="author" value="phvm.currentUser.name">
+					</div>
+				
+					<div class="col-md-8">
+						<input id="authorname" ng-model="phvm.currentUser.name" class="form-control" type="text" name="author">
+					</div>
+			
+				</div>
+			-->
+				<br>
+			
+				<div class="form-group">
+
+					
+					<label class="col-md-4">Review rating</label>
+
+					<div class="col-md-8 text-center">
+						<img class="myimg" ng-src="{{vm.tempimage}}"/>
+					</div>
+	
+
+					<input style="display:none" id="rating" ng-model="vm.formData.rating" class="form-control" type="text" name="rating">
+				
+
+	<script>
+	var whatim = {"0": "/images/0stars.png", "1":"/images/1stars.png", "2":"/images/2stars.png", "3":"/images/3stars.png", "4":"/images/4stars.png", "5":"/images/5stars.png", "6":"/images/6stars.png", "7":"/images/7stars.png", "8":"/images/8stars.png", "9":"/images/9stars.png", "10":"/images/10stars.png"};
+	var parcen, temppercen, clicktemppercen;
+	var clicktemppercen = 0;
+
+	$(document).ready(function() {
+	  $('.myimg').mousemove(function(e) {
+	    var width = $('.myimg').get(0).naturalWidth;
+
+	    $("#widthimg").html(width);
+	    var parentoffset = $('.myimg').parent().offset();
+	    var imoff =$('.myimg').offset();
+	    $("#parento").html(imoff.left);
+	    $("#parento2").html(e.pageX);
+	    var relX = (e.pageX - imoff.left);
+	    percen = ((relX / width) * 100)-5;
+
+	    if (percen < 10){
+	    	var newcursrc = "/images/1stars.png";
+	    	$('.myimg').attr('src', newcursrc);
+	    	temppercen = "1";
+	    } else if (percen > 10 && percen < 20){
+	    	$('.myimg').attr('src', "/images/2stars.png");
+	    	temppercen = "2";
+	    } else if (percen > 20 && percen < 30){
+	    	$('.myimg').attr('src', "/images/3stars.png");
+	    	temppercen = "3";
+	    } else if (percen > 30 && percen < 40){
+	    	$('.myimg').attr('src', "/images/4stars.png");
+	    	temppercen = "4";
+	    } else if (percen > 40 && percen < 50){
+	    	$('.myimg').attr('src', "/images/5stars.png");
+	    	temppercen = 5;
+	    } else if (percen > 50 && percen < 60){
+	    	$('.myimg').attr('src', "/images/6stars.png");
+	    	temppercen = "6";
+	    } else if (percen > 60 && percen < 70){
+	    	$('.myimg').attr('src', "/images/7stars.png");
+	    	temppercen = "7";
+	    } else if (percen > 70 && percen < 80){
+	    	$('.myimg').attr('src', "/images/8stars.png");
+	    	temppercen = "8";
+	    } else if (percen > 80 && percen < 90){
+	    	$('.myimg').attr('src', "/images/9stars.png");
+	    	temppercen = "9";
+	    } else if (percen > 90 && percen < 100){
+	    	$('.myimg').attr('src', "/images/10stars.png");
+	    	temppercen = "10";
+	    }
+
+	    $("#rating").val(temppercen);
+	    $("#percentage").html(percen);
+
+		});
+	});
+	$(document).ready(function() {
+	 	$('.myimg').mouseleave(function(){
+	    		var find = clicktemppercen.toString();
+	    		//alert(find);
+	    		var im = whatim[find];
+	    		$('.myimg').attr('src', im);
+	    		$("#rating").val(clicktemppercen);
+	    	
+	    });
+	});
+
+	$(document).ready(function() {
+	    $('.myimg').click(function(){
+	    	clicktemppercen = temppercen;
+	    	//alert(clicktemppercen);
+	    	$("#rating").val(parseFloat(clicktemppercen));
+	    	$("#rating").trigger('input');
+	    });
+	});
+	</script>
+			
+			
+				</div>
+			
+				<br>
+			
+				<div class="form-group">
+					<label class="col-md-4">Review</label>
+
+					<div class="col-md-8">
+						<textarea ng-model="vm.formData.review" name="review" rows="4" cols="30" class="form-control col-md-8"></textarea>
+					</div>
+
+				</div>
+			
+				<br>
+			
+			
+				<div class="col-md-8 col-md-offset-4">
+			
+					<button type="submit" ng-click="isReplyFormOpen = !isReplyFormOpen" onclick="resetimage();" >Submit</button>
+	
+					<script>
+		
+					function resetimage(){
+						$('.myimg').attr('src', "/images/0stars.png");
+					};
+			
+					</script>
+	
+				</div>
+
+			</form>
+
+			<div class="clearfix"></div>
+			<hr>
+			
+			<h3 >Reviews:</h3>
+			
+			<div class="clearfix"></div>
+			<hr>
+			<div ng-repeat="i in vm.lesson.reviews | orderBy : 'createdon':true">
+		
+				<div>
+					<h5>Author: {{i.author}}</h5>
+					<h5>Date: {{i.createdOn | date: yyyy/MM/dd}}</h5>
+					<!--
+					<p>{{i.rating}}</p>
+					-->
+					<div>
+						<img ng-src="/images/{{i.rating}}stars.png"/>
+					</div>
+					
+					<p>{{i.reviewText}}</p>
+					
+					<!--
+					<p>Date: {{i.createdOn | date: yyyy/MM/dd}}</p>
+					-->
+					<div ng-if="phvm.currentUser.type==1">
+						<button ng-click="vm.delrev(vm.lesson._id, i._id)">Delete</button>
+					</div>
+				</div>
+				<br>
+				<hr>
+
+			</div>
+		</div>
+
+
+		<div class="col-md-8">
+
+			<iframe style="width:100%; min-height:400px; margin-top:15px;" ng-src="{{ vm.planurl }}" name="internal" target="internal" border="0"></iframe>
+			
+		</div>
+
+	<div>
+
+</div>
+
+
+<page-footer></page-footer>
+
+
+		

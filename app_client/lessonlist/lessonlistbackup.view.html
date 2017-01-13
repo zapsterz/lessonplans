@@ -1,0 +1,82 @@
+
+<page-header></page-header>
+
+
+<div ng-controller="lessonlistCtrl" class="llbg">
+
+	<div ng-repeat="i in vm.alllessons">
+
+		<div class='row'>
+			
+			<div class="col-md-1"><p></p></div>
+		
+				<div class="col-md-3">
+					<a href="/#/showplans/{{i.level}}/{{i.topic}}/{{i._id}}"><h3 style="text-transform: capitalize;">{{i.name}}</h3></a>
+
+					<p class="colw">{{ i.description}}</p>
+					<p class="colw" style="color:gray" ng-if="i.description === ''">No description available</p>
+					<!--
+					<p class="colw" style="text-transform: capitalize;">{{i.level}}</p>
+					-->
+				</div>
+
+				<div class="col-md-3">
+
+				<div id="divonelesson">
+				
+				
+					<iframe ng-src="{{ '/datastore/' + i.level + '/' + i.topic + '/' + i._id + '.pdf' }}" name="internal" target="internal" seamless='seamless' id="ifonelesson" frameborder="0" hspace="0" vspace="0" marginheight="0" marginwidth="0"></iframe>
+				
+					<p>/datastore/{{i.level}}/{{i.topic}}/{{i._id}}.pdf</p>
+
+					<embed ng-src="{{ '/datastore/' + i.level + '/' + i.topic + '/' + i._id + '.pdf' }}" width="100%" min-height="200" alt="pdf" pluginspage="http://www.adobe.com/products/acrobat/readstep2.html" frameborder="0" hspace="0" vspace="0" marginheight="0" marginwidth="0">
+				
+				</div>
+
+				</div>
+		
+				<div class="col-md-2">
+			
+					<p class="colw" style="padding:50px 0px 0px 0px;">Rating: {{i.averagereview | formatavereview}}</p><!-- for i in rating, do star -->
+				</div>
+		
+				<div class="col-md-2">
+					<button style="margin:48px 0px 0px 0px;"><a href="/datastore/{{i.level}}/{{i.topic}}/{{i._id}}.{{i.ext}}" download="{{i.name}}">Download Plan</a></button>
+				</div>
+				
+				<div class=	"col-md-6 ">
+
+					<form ng-submit="vm.onSubmit(i._id)" method="post" role="form" class="container-fluid form-horizontal">
+						<div>
+							<button type="submit" style="margin:48px 0px 0px 0px;">Delete</button>
+						</div>
+					</form>
+				</div>
+			
+			</div>		
+			<!-- Divider for between the lessons -->
+			<hr style="border:2px solid white; background-color: white; height:1px; min-height:1px"/>
+		</div>			
+<!--
+		<hr style="border:2px solid white; background-color: white; height:1px; min-height:1px"/>
+-->	
+	</div>			
+
+	<div class="clearfix">
+		
+	</div>
+
+
+
+	
+</div>	
+
+
+
+
+
+<page-footer></page-footer>
+
+
+
+		

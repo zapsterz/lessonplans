@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html ng-app='lps'>
+  <head>
+    
+    <!--<link rel='stylesheet' href='/stylesheets/style.css' />-->
+	<link rel='stylesheet' href='/stylesheets/lessonplanscss.css' />
+	<link rel='stylesheet' href='/stylesheets/bootstrap/css/bootstrap.css' />
+	<link rel='stylesheet' href='/stylesheets/lessonplanscss.css' />
+	<script src='/javascripts/jquery-3.1.0.min.js' ></script>
+	<script src='/stylesheets/bootstrap/js/bootstrap.js' ></script>
+	<script src="/angular/angular.min.js"></script>
+	<!--<script src="/angular/myangular.js"></script>-->
+	<script src="/cl_app.js"></script>
+	<script src="/lib/angular-route.min.js"></script>
+	<script src="/home/home.controller.js"></script>
+	<script src="/about/about.controller.js"></script>
+	<script src="/submit/submit.controller.js"></script>
+	<script src="/onelesson/onelesson.controller.js"></script>
+	<script src="/services/onelessonserv.service.js"></script>
+	<script src="/lessonlist/lessonlist.controller.js"></script>
+
+	
+	<script src="/auth/register/register.controller.js"></script>
+	
+
+	<script src="/auth/login/login.controller.js"></script>
+	
+	<script src="/services/authentication.service.js"></script>
+
+	<script src="/services/lessonlistserv.service.js"></script>
+	<script src="/filters/formatavereview.filter.js"></script>
+	<script src="/directives/pageFooter/pageFooter.directive.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+
+
+
+	<div class="container-fluid bg-primary">
+		<img src="/images/logo-white.png" style="padding:6px 5px 0px 5px;">
+	</div>
+
+
+	<nav class="navbar navbar-inverse navbar-static-top">
+
+		<div class="container">
+
+			<ul class="nav navbar-nav">
+
+				<% for (var key in menuoptions) {%>
+		
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="/#/showplans/<%= key %>"><%= menuoptions[key].title %>
+					<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						
+					<% for (var i=0; i<menuoptions[key].options.length; i++) {%>
+						<li><a href="/#/showplans/<%= key %>/<%= menuoptions[key].links[i] %>"><%= menuoptions[key].options[i] %></a></li>
+
+					<% } %> 
+
+
+					</ul>
+				</li>
+
+				<% } %>
+
+				<li><a href="#">Worksheet Generator</a></li> 
+				<li><a href="#">Contact</a></li>
+				<li><a href="/#/about">About</a></li>
+				<li><a href="/#/submit">Submit</a></li>
+			</ul>
+		
+		</div>
+	</nav>
+
+	
+	
+<nav class="breadcrumb">
+  <li class="breadcrumb-item"><a href="/">Home</a></li>
+</nav>
+
+
+	<div class="container-fluid">
+		<div ng-view>
+		
+		</div>
+	
+	</div>
+
+
+
+
+<!--  
+	<div class="container-fluid bg-primary">
+		<h1>teacherzone.co.uk</h1>
+	</div>
+
+	
+	<nav class="navbar navbar-inverse navbar-static-top">
+
+		<div class="container">
+
+			<ul class="nav navbar-nav">
+
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#Primary">Primary
+					<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="primary/art">Art</a></li>
+						<li><a href="primary/literacy">Literacy</a></li>
+						<li><a href="primary/numeracy">Numeracy</a></li>
+						<li><a href="primary/science">Science</a></li> 
+					</ul>
+				</li>
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#Secondary">Secondary
+					<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="secondary/art">Art</a></li>
+						<li><a href="secondary/biology">Biology</a></li>
+						<li><a href="secondary/chemistry">Chemistry</a></li>
+						<li><a href="secondary/english">English</a></li>
+						<li><a href="secondary/mathematics">Mathematics</a></li>
+						<li><a href="secondary/physics">Physics</a></li> 
+					</ul>
+				</li>
+				
+
+				<li><a href="#">Worksheet Generator</a></li> 
+				<li><a href="#">Contact</a></li>
+				<li><a href="#">About</a></li>
+			</ul>
+		
+		</div>
+	</nav>
+	
+-->
+	
+<!--
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+	<ol class="carousel-indicators">
+		<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+		<li data-target="#myCarousel" data-slide-to="1"></li>
+		<li data-target="#myCarousel" data-slide-to="2"></li>
+	</ol>
+
+	<div class="carousel-inner">
+		<div class="item active">
+
+			<p>Some stuff for the first slide </p>
+		</div>
+		<div class="item">
+			<p>Some stuff for the second slide </p>
+		</div>
+		<div class="item">
+			<p>Some stuff for the third slide </p>
+		</div>
+	</div>
+</div>	
+-->	
+	
+		
+  
+  </body>
+</html>

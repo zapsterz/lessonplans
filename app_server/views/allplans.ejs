@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html ng-app='lps'>
+  <head>
+    <title><%= title %></title>
+    <!--<link rel='stylesheet' href='/stylesheets/style.css' />-->
+	<link rel='stylesheet' href='/stylesheets/lessonplanscss.css' />
+	<link rel='stylesheet' href='/stylesheets/bootstrap/css/bootstrap.css' />
+	<link rel='stylesheet' href='/stylesheets/lessonplanscss.css' />
+	<script src='/javascripts/jquery-3.1.0.min.js' ></script>
+	<script src='/stylesheets/bootstrap/js/bootstrap.js' ></script>
+	<script src="/angular/angular.min.js"></script>
+	<script src="/angular/myangular.js"></script>
+	<script src="/cl_app.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+
+	<div class="container-fluid bg-primary">
+		<img src="/images/logo-white.png" style="padding:6px 5px 0px 5px;">
+		<!--<h1>freelessonplans</h1>-->
+	</div>
+
+
+	<nav class="navbar navbar-inverse navbar-static-top">
+
+		<div class="container">
+
+			<ul class="nav navbar-nav">
+
+				<% for (var key in menuoptions) {%>
+		
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#<%= menuoptions[i] %>"><%= menuoptions[key].title %>
+					<span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						
+					<% for (var i=0; i<menuoptions[key].options.length; i++) {%>
+						<li><a href="/showplans/<%= key %>/<%= menuoptions[key].links[i] %>"><%= menuoptions[key].options[i] %></a></li>
+
+					<% } %> 
+
+
+					</ul>
+				</li>
+
+				<% } %>
+				<li><a href="#">Worksheet Generator</a></li> 
+				<li><a href="#">Contact</a></li>
+				<li><a href="#">About</a></li>
+				<li><a href="/submit">Submit</a></li>
+			</ul>
+		
+		</div>
+	</nav>
+
+<% if (level && topic) { %>
+<nav class="breadcrumb">
+  <li class="breadcrumb-item"><a href="/">Home</a></li>
+  <li class="breadcrumb-item"><a href="/showplans/<%= level %>"><%= levelu %></a></li>
+  <li class="breadcrumb-item active"><%= topicu %></li>
+</nav>	
+
+<h2>Showing all plans for <%= levelu %>, <%= topicu %></h2>
+<% } else { %>
+<nav class="breadcrumb">
+  <li class="breadcrumb-item"><a href="/">Home</a></li>
+  <li class="breadcrumb-item active"><%= levelu %></li>
+</nav>
+
+<h2>Showing all plans for <%= levelu %></h2>
+<% } %>
+	
+<!-- Display current location -->
+
+
+<h3>API Results</h3>
+
+<div ng-controller="lessonDataCtrl">
+<div ng-repeat="i in data.lessons | orderBy : '-averagereview'">	
+
+
+
+
+
+
+
+
+
+	<div class='row'>
+	<!--<div class="col-xs-12">-->
+		<div class="col-md-1"><p></p></div>
+		
+			<div class="col-md-5">
+				<a href="/showplans/{{i.level}}/{{i.topic}}/{{i._id}}" ><h3>{{i.name}}</h3></a>
+				<p>{{i._id}}</p>
+		
+			
+				<p>{{ i.description}}</p>
+				<p>{{i.level}}</p>
+			</div>
+		
+			<div class="col-md-2">
+			
+				<p style="padding:50px 0px 0px 0px;">Rating: {{i.averagereview | formatavereview}}</p><!-- for i in rating, do star -->
+			</div>
+		
+			<div class="col-md-2 bg-warning">
+				<button style="margin:48px 0px 0px 0px;"><a href="{{i.link_doc}}" download="proposed_file_name">Download Plan</a></button>
+			</div>
+				
+			<div class=	"col-md-2 bg-warning">
+				<p>{{i.level}}</p>
+
+				<form action="/delete/{{i["level"]}}/{{i["topic"]}}/{{i["_id"]}}" method="post" role="form" class="container-fluid form-horizontal">
+					<div>
+						<p>{{i.level}}</p>
+						<button type="submit">Delete</button>
+		
+					</div>
+				</form>
+			</div>
+		</div>		
+	</div>			
+</div>			
+
+<div class="clearfix"></div>
+<hr />	
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+<h3>Non API</h3>
+<p>Total plans found: <%= found %></p>
+
+			<% for(var i=0; i<plans.length; i++) {%>
+<div class='row'>
+	<!--<div class="col-xs-12">-->
+		<div class="col-md-1"><p></p></div>
+		
+		<div class="col-md-5">
+			<a href="/showplans/<%= plans[i].level%>/<%= plans[i].topic%>/<%=plans[i]._id %>" ><h3><%= plans[i].name %></h3></a>
+			
+		
+			
+			<p><%= plans[i].description %></p>
+		</div>
+		
+		<div class="col-md-2">
+			
+			<p style="padding:50px 0px 0px 0px;">Average rating: <%=plans[i].averagereview %></p><!-- for i in rating, do star -->
+		</div>
+		
+		<div class="col-md-2 bg-warning">
+			<button style="margin:48px 0px 0px 0px;"><a href="<%=plans[i].link_doc %>" download="proposed_file_name">Download Plan</a></button>
+		</div>
+				
+		<div class=	"col-md-2 bg-warning">
+
+			<form action="/delete/<%= plans[i].level %>/<%= plans[i].topic %>/<%= plans[i]._id %>" method="post" role="form" class="container-fluid form-horizontal">
+				<div>
+					<button type="submit">Delete</button>
+		
+				</div>
+			</form>
+		</div>
+				
+				
+</div>			
+<div class="clearfix"></div>
+<hr />	
+
+			<% } %>
+
+
+
+  
+  </body>
+</html>

@@ -1,0 +1,54 @@
+<page-header></page-header>
+
+
+<div ng-controller="loginCtrl">
+  <div class="row">
+    <div class="col-sm-12">
+    
+
+  		<div class="row" style="margin:30px 0px 30px 0px">
+  			<div class="col-md-3 col-md-offset-4 col-xs-8 col-xs-offset-2">
+      
+
+          <form ng-submit="vm.onSubmit()">
+            <div role="alert" ng-show="vm.formError" class="alert alert-danger">where error goes{{ vm.formError }}
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input type="email" class="form-control" id="email" placeholder="Enter email" ng-model="vm.credentials.email">
+            </div>
+        
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" class="form-control" id="password" placeholder="Password" ng-model="vm.credentials.password">
+            </div>
+        
+            <button type="submit" class="bbkrd btn btn-default col-xs-6 col-xs-offset-3 col-md-6 col-md-offset-3 bg-primary">Sign in!</button>
+          </form>
+
+          <div class="row">
+          </div>
+
+        <div class="hidden-md hidden-lg" style="margin-top:10px;">
+          <p class="lead text-center">Not a member? Please <a href="/#register?page=">register</a> first.</p>
+        </div>
+
+
+        </div>
+	  
+        <div class="col-md-2">
+          <p class="lead hidden-sm hidden-xs col-md-12 text-center">Not a member? Please <a href="/#register?page=">register</a> first.</p>
+	   	  </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+  <page-footer></page-footer>
+
+
+
+

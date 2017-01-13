@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app='lps'>
+  <head>
+	
+	<link rel='stylesheet' href='/stylesheets/bootstrap/css/bootstrap.css' />
+	<link rel='stylesheet' href='/stylesheets/lessonplanscss.css' />
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<base href="/">
+
+
+  	<script src='/javascripts/jquery-3.1.0.min.js' ></script>
+	<script src='/stylesheets/bootstrap/js/bootstrap.js' ></script>
+	
+	<script src="/angular/angular.min.js"></script>
+	<script src="/angular/angular-cookies.js"></script>
+	<script src="/lib/angular-route.min.js"></script>
+	
+	<script src="/cl_app.js"></script>
+
+	<script src="/home/home.controller.js"></script>
+	<script src="/about/about.controller.js"></script>
+	<script src="/submit/submit.controller.js"></script>
+	<script src="/contact/contact.controller.js"></script>
+	<script src="/onelesson/onelesson.controller.js"></script>
+	<script src="/services/onelessonserv.service.js"></script>
+	<script src="/lessonlist/lessonlist.controller.js"></script>
+	<script src="/directives/pageHeader/pageHeader.directive.js"></script>
+	<script src="/directives/pageHeader/pageHeaderCtrl.controller.js"></script>
+	<script src="/directives/navigation/navigation.directive.js"></script>
+	<script src="/directives/pageFooter/pageFooter.directive.js"></script>
+	<script src="/auth/register/register.controller.js"></script>
+	<script src="/auth/login/login.controller.js"></script>
+	<script src="/services/authentication.service.js"></script>
+	<script src="/services/lessonlistserv.service.js"></script>
+	<script src="/filters/formatavereview.filter.js"></script>
+	<script src="/filters/choosestars.filter.js"></script>
+
+
+
+  	
+  </head>
+  <body ng-view>
+	
+  </body>
+</html>

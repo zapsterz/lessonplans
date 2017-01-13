@@ -1,0 +1,115 @@
+
+<page-header></page-header>
+
+<div id="welcome" class="container-fluid" style="margin-top:20px; min-height:500px;" >
+
+	<div class="col-md-12 bgt">
+
+		<h3 style="display:inline">Welcome!</h3><h4 style="display:inline; margin-left:20px;">Follow the steps below to get started:</h4>
+				
+		<div class="row">
+
+			<div class="col-md-4 text-center" style="background:none; min-height:30px;">
+
+				<h3 id="levelstitle">1. Select your level</h3>
+				<div id="levels">
+					<p id="levpri" class="btn btn-primary optionbuttons" class="col-md-12" ng-click="vm.sellevel = 'primary'" onclick="sellevel(id);">Primary</p>
+					<p id="levsec" class="btn btn-primary optionbuttons" class="col-md-12" ng-click="vm.sellevel = 'secondary'" onclick="sellevel(id);">Secondary</p>
+				</div>
+			
+				<script>
+
+				function sellevel(id) {
+					var j = document.getElementById("levpri");
+					j.className = "btn btn-primary optionbuttons";
+					var k = document.getElementById("levsec");
+					k.className = "btn btn-primary optionbuttons";
+					var x = document.getElementById(id);
+					x.className = "btn btn-warning optionbuttons";
+				};
+
+				function pseltopic(id) {
+					
+					var a = document.getElementById("ptopart");
+					a.className = "btn btn-primary optionbuttons";
+					var b = document.getElementById("ptoplit");
+					b.className = "btn btn-primary optionbuttons";
+					var c = document.getElementById("ptopmus");
+					c.className = "btn btn-primary optionbuttons";
+					var d = document.getElementById("ptopnum");
+					d.className = "btn btn-primary optionbuttons";
+					var e = document.getElementById("ptopsci");
+					e.className = "btn btn-primary optionbuttons";
+					var x = document.getElementById(id);
+					x.className = "btn optionbuttons btn-warning";
+
+				}
+
+				function seltopic(id){
+					var f = document.getElementById("stopart");
+					f.className = "btn optionbuttons btn-primary";
+					
+					var g = document.getElementById("stopbio");
+					g.className = "btn optionbuttons btn-primary";
+					var h = document.getElementById("stopchem");
+					h.className = "btn optionbuttons btn-primary";
+					var i = document.getElementById("stopeng");
+					i.className = "btn optionbuttons btn-primary";
+				
+					var j = document.getElementById("stopfre");
+					j.className = "btn optionbuttons btn-primary";
+					var k = document.getElementById("stopmat");
+					k.className = "btn optionbuttons btn-primary";
+					var l = document.getElementById("stopphy");
+					l.className = "btn optionbuttons btn-primary";
+
+					var x = document.getElementById(id);
+					x.className = "btn optionbuttons btn-warning";
+				};	
+
+
+
+				</script>
+
+			</div>
+
+			<div class="col-md-4 text-center" style="background:none; min-height:30px;">
+				<h3 ng-if="vm.sellevel !== 'unset'" id="primoptionstitle">2. Find your topic</h3>
+
+				<div id="primoptions" ng-if="vm.sellevel === 'primary'">
+					<p id="ptopart" ng-click="vm.seltopic = 'art'" onclick="pseltopic(id);" class="btn btn-primary optionbuttons">Art</p>
+					<p ng-click="vm.seltopic = 'literacy'" onclick="pseltopic(id);" id = "ptoplit" class="btn btn-primary optionbuttons">Literacy</p>
+					<p ng-click="vm.seltopic = 'music'" onclick="pseltopic(id);" id = "ptopmus" class="btn btn-primary optionbuttons">Music</p>
+					<p ng-click="vm.seltopic = 'numeracy'" onclick="pseltopic(id);" id = "ptopnum" class="btn btn-primary optionbuttons">Numeracy</p>
+					<p ng-click="vm.seltopic = 'science'" onclick="pseltopic(id);" id = "ptopsci" class="btn btn-primary optionbuttons">Science</p>
+				</div>
+
+				<div id="secoptions" ng-if="vm.sellevel === 'secondary'">
+					<p ng-click="vm.seltopic = 'art'" onclick="seltopic(id);" id="stopart" class="btn btn-primary optionbuttons">Art</p>
+					<p ng-click="vm.seltopic = 'biology'" onclick="seltopic(id);" id="stopbio" class="btn btn-primary optionbuttons">Biology</p>
+					<p ng-click="vm.seltopic = 'chemistry'" onclick="seltopic(id);" id="stopchem" class="btn btn-primary optionbuttons">Chemistry</p>
+					<p ng-click="vm.seltopic = 'english'" onclick="seltopic(id);" id="stopeng" class="btn btn-primary optionbuttons">English</p>
+					<p ng-click="vm.seltopic = 'french'" onclick="seltopic(id);" id="stopfre" class="btn btn-primary optionbuttons">French</p>
+					<p ng-click="vm.seltopic = 'maths'" onclick="seltopic(id);" id="stopmat" class="btn btn-primary optionbuttons">Maths</p>
+					<p ng-click="vm.seltopic = 'physics'" onclick="seltopic(id);" id="stopphy" class="btn btn-primary optionbuttons">Physics</p>
+				</div>
+
+
+
+			</div>
+
+			<div class="col-md-4 text-center" style="background:none; min-height:30px;">
+
+				<h3 ng-if="vm.seltopic !== 'unset'" id="finallinktitle">3. Browse the plans*</h3>
+
+				<a id="finallink" ng-if="(vm.seltopic) !== 'unset'" class="btn btn-primary optionbuttons" href="/#/showplans/{{vm.sellevel}}/{{vm.seltopic}}">Browse the plans</a>
+			</div>
+		
+		</div>
+
+	</div>
+
+</div>
+
+<page-footer></page-footer>
+

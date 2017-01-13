@@ -1,6 +1,76 @@
+html, body {
+	min-height:100%;
+	background-color:white;
+}
+
+html {
+	position:relative;
+}
+
+@keyframes disappear {
+  0% {
+    height: 64px;
+    padding-bottom:20px;
+    padding-top:20px;
+  }
+  
+  80% {
+    height: 64px;
+    padding-bottom:20px;
+    padding-top:20px;
+  }
+  
+  100% {
+    height:0px;
+  	min-height:0px;
+  	    padding-bottom:0px;
+    padding-top:0px;
+
+  }
+}
+
+body {
+	margin-bottom: 60px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+  margin-top:30px;
+}
+
+#ckwarning {
+	background-color:red;
+	color:white;
+	font-weight:900;
+	
+	animation: 5s disappear;
+    -webkit-animation-fill-mode: forwards; /* Safari 4.0 - 8.0 */
+    animation-fill-mode: forwards;	
+	height:64px;
+	overflow:hidden;
+	width:100%;
+
+}
+
+
+
+p, li {
+	font-size: 1.2em;
+}
+
+
 .pink {
 
 	background-color:pink !important;	
+}
+
+.colw {
+	color:white;
 }
 
 .claire {
@@ -11,4 +81,155 @@
 .carousel-inner > .item > img {
     margin: 0 auto;
 	max-height:300px;
+}
+
+.dotsbg {
+	background-image:url(/images/backgrounds/gd1.JPG);
+	background-size: 100% auto;
+	background-repeat: no-repeat;
+}
+
+
+.download_button {
+	border-radius:6px;
+	/*min-width: 200px;
+	padding:20px;*/
+	padding-bottom:20px;
+	padding-top:20px;
+}
+
+button.bbkrd {
+	background: #3071a9;
+	color: white;
+}
+
+.loginbtn {
+	background: rgba(255,255,255,0.8);
+	color:#051838;
+	color:black;
+	margin-top:15px;
+	/*opacity:0.8;*/
+}
+
+#welcome {
+	/*
+	background-image:url(/images/backgrounds/gd1.JPG);
+	*/
+	background-color: white;
+	background-size: 100% auto;
+	background-repeat: no-repeat;
+	color:#051838;
+	min-height:100%;
+
+	
+}
+
+#welcomewords {
+	color:lime;
+	background-image:url(/images/backgrounds/gd1.JPG);
+}
+
+.bgt {
+	/*background-image:url(/images/backgrounds/gd1.JPG);*/
+}
+
+.header {
+	background-image:url(/images/backgrounds/banner.JPG);
+	background-position: center;
+	background-size: 100%;
+}	
+
+.header {
+	background: linear-gradient(to bottom right,#0d1b28,#5697d0);
+
+}
+
+
+.llbg {
+
+background-image:url(/images/backgrounds/gd2.JPG);
+
+}
+
+.submit {
+	background-image:url(/images/backgrounds/gd3.JPG);
+
+}
+
+.myactive {
+	border-bottom:2px solid white;
+	color:white !important;
+	opactiy:1;
+}
+
+.optionbuttons {
+	margin:5px 0 5px 0;
+	width:80%;
+}
+
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+#finallink, #levels, #primoptions, #secoptions {
+	animation: 2s fadeIn;
+}
+
+#finallinktitle, #levelstitle, #primoptionstitle {
+	animation: 1s fadeIn;
+}
+
+#finallink:hover {
+	background-color: orange;
+	border-color: orange;
+}
+
+p.boldtext {
+	text-decoration: bold;
+}
+
+div#divonelesson {
+	/*width:100%;
+	min-height:500px;
+	background-color: lime;*/
+	text-align:center;
+}
+
+
+#ifonelesson {
+	min-height:250px;
+	width:90%;
+	margin-top:0px;
+}
+
+@media (max-width: 600px) {
+  #ifonelesson {
+    min-height:200px;
+  }
+}
+
+.colg {
+	color: #C0C0C0;
+}
+
+.vcentercp {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
+.vcentercpt {
+	display:inline-block;
+	float: none;
+}
+
+.capitalize {
+	text-transform: capitalize;
 }
