@@ -65,7 +65,7 @@ function onelessonCtrl ($routeParams, onelessonserv){
 
 	vm.actionurl = "/showplans/" + $routeParams.level + "/" + $routeParams.topic + "/" + $routeParams.id;
 	vm.deletereviewurl = "/delete/" + $routeParams.level + "/" + $routeParams.topic + "/" + $routeParams.id + "/reviews";
-	vm.planurl = "/datastore/" + $routeParams.level + "/" + $routeParams.topic + "/" + $routeParams.id + ".pdf";
+	vm.planurl = "/datastore/" + $routeParams.level + "/" + $routeParams.topic + "/" + $routeParams.id + ".htm";
 	console.log(vm.planurl);
 
 };	

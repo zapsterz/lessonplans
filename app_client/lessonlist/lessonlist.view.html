@@ -28,10 +28,17 @@
 
 					</div><!--
 
-					--><div id="divonelesson" class="col-xs-10 col-xs-offset-1 col-md-7 col-md-offset-0 vcentercp" >
-					
+					--><div id="divonelesson" class="col-xs-10 col-xs-offset-1 col-md-7 col-md-offset-0 vcentercp">
+					<!--
 						<iframe class="valign" ng-src="{{ '/datastore/' + i.level + '/' + i.topic + '/' + i._id + '.pdf' }}" name="internal" target="internal" seamless='seamless' id="ifonelesson" frameborder="0" hspace="0" vspace="0" marginheight="0" marginwidth="0" width="100" style="margin-top:10px;"></iframe>
+					-->
+<div id="iframetitle">Lesson preview</div>
 
+<iframe id="lliframe" class="valign" ng-src="{{ '/datastore/' + i.level + '/' + i.topic + '/' + i._id + '.htm' }}" name="internal" target="internal" seamless='seamless' id="ifonelesson" frameborder="0" hspace="0" vspace="0" marginheight="0" marginwidth="0" width="100"></iframe>
+
+<!--
+<iframe class="valign" ng-src="{{ '/ViewerJS/#../datastore/' + i.level + '/' + i.topic + '/' + i._id + '.pdf' }}" name="internal" target="internal" seamless='seamless' id="ifonelesson" frameborder="0" hspace="0" vspace="0" marginheight="0" marginwidth="0" width="100" style="margin-top:10px;"></iframe>
+-->
 						<button class="btn btn-primary" style="margin:6px 0px 0px 0px;"><a style="color:white" href="/datastore/{{i.level}}/{{i.topic}}/{{i._id}}.{{i.ext}}" download="{{i.name}}" target="_self">Download Plan</a></button>
 
 					</div>				
@@ -51,6 +58,7 @@
 		</div>
 	</div>
 </div>
+
 
 
 
